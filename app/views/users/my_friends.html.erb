@@ -1,0 +1,7 @@
+<h1>My friends</h1>
+
+<% @records.each do |record| %>
+  <div class='user-block' id='record-<%= record.id %>'>
+    <%= friend(record).email %>
+  </div>
+<% end %>

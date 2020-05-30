@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_30_095908) do
+ActiveRecord::Schema.define(version: 2020_05_30_104627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "user_friendships", force: :cascade do |t|
+    t.bigint "initiator_id"
+    t.bigint "receiver_id"
+    t.integer "status", default: 0
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["initiator_id", "receiver_id"], name: "index_user_friendships_on_initiator_id_and_receiver_id", unique: true
+    t.index ["initiator_id"], name: "index_user_friendships_on_initiator_id"
+    t.index ["receiver_id"], name: "index_user_friendships_on_receiver_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false

@@ -1,6 +1,8 @@
 <h1>User`s page</h1>
 
 <% @users.each do |user| %>
-  <p><%= user.email %></p>
-  <button class='btn btn-success'>Push me</button>
+  <div class='user-block'>
+    <%= user.email %>
+    <%= link_to  "Request to friend", friendships_path(user_id: user.id), method: :post, class: 'btn btn-warning' %>
+  </div>
 <% end %>

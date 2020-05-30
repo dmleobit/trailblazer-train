@@ -1,0 +1,9 @@
+<h1>Requested to me</h1>
+
+<% @records.each do |record| %>
+  <div class='user-block'>
+    <%= record.initiator.email %>
+    <%= link_to  "Accept", accept_friendship_path(record.id), method: :post, class: 'btn btn-success' %>
+    <%= link_to  "Reject", reject_friendship_path(record.id), method: :delete, class: 'btn btn-danger' %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<h1>My requests</h1>
+
+<% @records.each do |record| %>
+  <div class='user-block' id='record-<%= record.id %>'>
+    <%= record.receiver.email %>
+    <%= link_to  "Cancel", cancel_friendship_path(record.id), method: :delete, class: 'btn btn-danger' %>
+  </div>
+<% end %>
