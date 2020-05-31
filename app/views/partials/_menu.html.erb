@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <%= link_to 'Main page (posts)', posts_path, class: 'btn btn-info' %>
     <%= link_to 'List of friends', my_friends_users_path, class: 'btn btn-info' %>
     <%= link_to 'List of users', users_path, class: 'btn btn-info' %>
     <%= link_to 'Received requests', requested_to_me_users_path, class: 'btn btn-success' %>

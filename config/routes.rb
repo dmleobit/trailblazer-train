@@ -17,5 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'users#index'
+  resources :posts, only: %i[index new create destroy] do
+    resources :likes, only: %i[create], on: :member
+  end
+
+  root 'posts#index'
 end
