@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[like]
 
   def index
-    @comments = @post.comments
+    @comments = @post.comments.includes(:user, :likes)
     @comment = current_user.comments.new
   end
 
@@ -19,13 +19,8 @@ class CommentsController < ApplicationController
   end
 
   def like
-    if @comment.likes.exists?(user: current_user)
-      @comment.likes.find_by(user: current_user).destroy
-      flash[:danger] = 'Disliked'
-    else
-      flash[:success] = 'Liked'
-      @comment.likes.create(user: current_user)
-    end
+    result = CreateOrDestroyLike.call(current_user, @comment)
+    flash[result.flash_type] = result.flash_message
 
     redirect_to comments_path(@comment.post)
   end

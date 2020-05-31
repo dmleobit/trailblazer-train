@@ -1,5 +1,6 @@
 require_relative 'boot'
 
+# require 'rails/all'
 require 'rails'
 require 'active_record/railtie'
 require 'active_storage/engine'

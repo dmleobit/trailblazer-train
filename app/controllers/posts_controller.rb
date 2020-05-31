@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   def index
     # TODO: sort
-    @posts = Post.all
+    @posts = Post.all.includes(:user)
   end
 
   def new
@@ -16,13 +16,8 @@ class PostsController < ApplicationController
   end
 
   def like
-    if post.likes.exists?(user: current_user)
-      post.likes.find_by(user: current_user).destroy
-      flash[:danger] = 'Disliked'
-    else
-      flash[:success] = 'Liked'
-      post.likes.create(user: current_user)
-    end
+    result = CreateOrDestroyLike.call(current_user, post)
+    flash[result.flash_type] = result.flash_message
 
     redirect_to posts_path
   end

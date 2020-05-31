@@ -4,7 +4,7 @@
 
 <%= image_tag  avatar(@user), class: 'avatar' %>
 
-<% @comments.each do |comment| %>
+<% @posts.each do |comment| %>
   <div class='post-block'>
     <p><%= comment.text %></p>
   </div>
