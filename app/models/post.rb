@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
-  has_many :likes
-  has_many :comments
+  has_many :likes, as: :likeable, dependent: :destroy
+  has_many :comments, dependent: :destroy
   belongs_to :user
 
   validates :text, presence: true

@@ -9,11 +9,11 @@ module UserHelper
 
   def request_button(user)
     if current_user.friend?(user)
-      link_to "Friend", '#', class: 'btn btn-success'
+      link_to "Friend", '#', class: 'btn btn-outline-success'
     elsif current_user.pending_friend_request?(user)
-      link_to "Pending friend request", '#', class: 'btn btn-info'
+      link_to "Pending friend request", '#', class: 'btn btn-outline-info'
     else
-      link_to  "Request to friend", friendships_path(user_id: user.id), method: :post, class: 'btn btn-warning'
+      link_to  "Request to friend", friendships_path(user_id: user.id), method: :post, class: 'btn btn-outline-warning'
     end
   end
 

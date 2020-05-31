@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  devise_for :users, controllers: {
+    omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations'
+  }
 
   resources :users, only: %i[index show update] do
     collection do
@@ -19,8 +22,10 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create destroy] do
     member do
-      resources :likes, only: %i[create]
-      resources :comments, only: %i[index create]
+      post :like
+      resources :comments, only: %i[index create] do
+        post :like, on: :member
+      end
     end
   end
 

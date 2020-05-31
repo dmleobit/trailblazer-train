@@ -1,11 +1,14 @@
 <h1>Comment`s page for post - <%= @post.text %></h1>
 
 <% @comments.each do |comment| %>
-  <p><%= comment.text %></p>
-  <p>by <%= comment.user.email %></p>
+  <div class='post-block'>
+    <p><%= comment.text %></p>
+    <p>by <%= comment.user.email %></p>
+    <%= link_to  "Like", like_comment_path(comment), method: :post %>
+    <%= comment.likes.count %>
+  </div>
 <% end %>
 
-<%= @comment.errors.full_messages %>
 <%= simple_form_for @comment do |f| %>
   <%= f.input :text %>
   <%= f.button :submit %>

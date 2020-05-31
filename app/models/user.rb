@@ -11,11 +11,13 @@ class User < ApplicationRecord
 
   devise :omniauthable, omniauth_providers: %i[facebook]
 
-  has_many :sent_requests, foreign_key: :initiator_id, class_name: UserFriendship.name
-  has_many :received_requests, foreign_key: :receiver_id, class_name: UserFriendship.name
-  has_many :posts
-  has_many :likes
-  has_many :comments
+  with_options dependent: :destroy do |assoc|
+    assoc.has_many :sent_requests, foreign_key: :initiator_id, class_name: UserFriendship.name
+    assoc.has_many :received_requests, foreign_key: :receiver_id, class_name: UserFriendship.name
+    assoc.has_many :posts
+    assoc.has_many :likes
+    assoc.has_many :comments
+  end
 
   has_one_attached :avatar
 

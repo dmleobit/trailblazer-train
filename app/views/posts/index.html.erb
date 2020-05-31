@@ -1,12 +1,12 @@
 <h2>Post list page</h2>
 
-<%= link_to  "Create new post", new_post_path, class: 'btn btn-primary' %>
+<%= link_to  "Create new post", new_post_path, class: 'btn btn-outline-primary' %>
 
 <% @posts.each do |post| %>
   <div class='post-block'>
     <p><%= post.text %></p>
     <h6>Author - <%= post.user.email %></h6>
-    <%= link_to  "Like", likes_path(post), method: :post %>
+    <%= link_to  "Like", like_post_path(post), method: :post %>
     <%= post.likes.count %>
     <%= link_to  "Comments", comments_path(post) %>
     <%= post.comments.count %>

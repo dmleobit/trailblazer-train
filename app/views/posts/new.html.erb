@@ -1,5 +1,8 @@
-<%= @post.errors.full_messages %>
+<% if @post.errors.present? %>
+  <%= @post.errors.full_messages %>
+<% end %>
+
 <%= simple_form_for @post do |f| %>
   <%= f.input :text %>
-  <%= f.button :submit %>
+  <%= f.button :submit, class: 'btn btn-warning' %>
 <% end %>

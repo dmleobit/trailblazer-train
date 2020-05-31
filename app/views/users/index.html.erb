@@ -4,7 +4,7 @@
   <div class='user-block'>
     <%= image_tag  avatar(user), class: 'avatar-list' %>
     <%= user.email %>
-    <%= link_to  "Show page", user_path(user), class: 'btn btn-info' %>
+    <%= link_to  "Show page", user_path(user), class: 'btn btn-outline-info' %>
     <%= request_button(user) %>
   </div>
 <% end %>

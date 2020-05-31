@@ -7,12 +7,6 @@ class UsersController < ApplicationController
     @comments = user.comments
   end
 
-  def update
-    current_user.avatar.purge if current_user.avatar.attached?
-
-    current_user.avatar.attach(user_params[:avatar])
-  end
-
   def requested_to_me
     @records = current_user.received_requests.pending.includes(:initiator)
   end
@@ -29,9 +23,5 @@ class UsersController < ApplicationController
 
   def user
     @user ||= User.includes(:comments, :likes).find(params[:id])
-  end
-
-  def user_params
-    params.require(:user).permit(:avatar)
   end
 end
