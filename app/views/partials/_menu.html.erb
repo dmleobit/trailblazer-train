@@ -5,6 +5,7 @@
     <%= link_to 'List of users', users_path, class: 'btn btn-info' %>
     <%= link_to 'Received requests', requested_to_me_users_path, class: 'btn btn-success' %>
     <%= link_to 'Sent requests', my_requests_users_path, class: 'btn btn-success' %>
+    <%= link_to 'My page', user_path(current_user), class: 'btn btn-success' %>
 
     <% if user_signed_in? %>
       <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: 'btn btn-danger' %>

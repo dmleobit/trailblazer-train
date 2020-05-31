@@ -1,0 +1,7 @@
+<h2>Show user page</h2>
+
+<%= @user.email %>
+
+<% @comments.each do |comment| %>
+  <p><%= comment.text %></p>
+<% end %>
