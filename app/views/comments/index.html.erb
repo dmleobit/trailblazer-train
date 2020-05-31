@@ -1,0 +1,12 @@
+<h1>Comment`s page for post - <%= @post.text %></h1>
+
+<% @comments.each do |comment| %>
+  <p><%= comment.text %></p>
+  <p>by <%= comment.user.email %></p>
+<% end %>
+
+<%= @comment.errors.full_messages %>
+<%= simple_form_for @comment do |f| %>
+  <%= f.input :text %>
+  <%= f.button :submit %>
+<% end %>

@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_many :sent_requests, foreign_key: :initiator_id, class_name: UserFriendship.name
   has_many :received_requests, foreign_key: :receiver_id, class_name: UserFriendship.name
   has_many :posts
+  has_many :likes
+  has_many :comments
 end

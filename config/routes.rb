@@ -18,7 +18,10 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index new create destroy] do
-    resources :likes, only: %i[create], on: :member
+    member do
+      resources :likes, only: %i[create]
+      resources :comments, only: %i[index create]
+    end
   end
 
   root 'posts#index'

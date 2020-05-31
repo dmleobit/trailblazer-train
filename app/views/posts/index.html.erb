@@ -6,7 +6,9 @@
   <div class='post-block'>
     <p><%= post.text %></p>
     <h6>Author - <%= post.user.email %></h6>
-    <%= link_to  "Like", post_likes_path(post), method: :post %>
+    <%= link_to  "Like", likes_path(post), method: :post %>
     <%= post.likes.count %>
+    <%= link_to  "Comments", comments_path(post) %>
+    <%= post.comments.count %>
   </div>
 <% end %>
