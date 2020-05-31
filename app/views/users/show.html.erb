@@ -2,6 +2,10 @@
 
 <%= @user.email %>
 
+<%= image_tag  avatar(@user), class: 'avatar' %>
+
 <% @comments.each do |comment| %>
-  <p><%= comment.text %></p>
+  <div class='post-block'>
+    <p><%= comment.text %></p>
+  </div>
 <% end %>

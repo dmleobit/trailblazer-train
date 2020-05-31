@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   def index
+    # TODO: sort
     @posts = Post.all
   end
 

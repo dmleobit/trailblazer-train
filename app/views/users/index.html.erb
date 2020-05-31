@@ -2,8 +2,9 @@
 
 <% @users.each do |user| %>
   <div class='user-block'>
+    <%= image_tag  avatar(user), class: 'avatar-list' %>
     <%= user.email %>
-    <%= link_to  "Request to friend", friendships_path(user_id: user.id), method: :post, class: 'btn btn-warning' %>
     <%= link_to  "Show page", user_path(user), class: 'btn btn-info' %>
+    <%= request_button(user) %>
   </div>
 <% end %>

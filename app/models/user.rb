@@ -8,4 +8,18 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes
   has_many :comments
+
+  has_one_attached :avatar
+
+  def friend?(user)
+    UserFriendship.where(initiator: self, receiver: user).or(
+      UserFriendship.where(receiver: self, initiator: user)
+    ).accepted.exists?
+  end
+
+  def pending_friend_request?(user)
+    UserFriendship.where(initiator: self, receiver: user).or(
+      UserFriendship.where(receiver: self, initiator: user)
+    ).pending.exists?
+  end
 end
