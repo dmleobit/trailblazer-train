@@ -11,8 +11,9 @@ module Users
         redirect_to new_user_registration_url
       end
     end
-  
+
     def failure
+      flash[:error] = 'You was not signed in'
       redirect_to root_path
     end
   end
