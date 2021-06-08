@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index new create destroy] do
+    collection do
+      post :create_random_posts
+      delete :destroy_all_posts
+    end
     member do
       post :like
       resources :comments, only: %i[index create] do

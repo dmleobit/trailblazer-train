@@ -11,6 +11,13 @@
 
   <body>
     <%= render './app_layouts/menu' %>
+
+    <% ApplicationHelper::ALERTS.each_key do |type| %>
+      <% if flash[type] %>
+        <%= alerts_from_flash(flash[type], type: type) %>
+      <% end %>
+    <% end %>
+
     <div class='container'>
       <%= yield %>
     </div>

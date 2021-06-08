@@ -22,6 +22,14 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def create_random_posts
+
+  end
+
+  def destroy_all
+    
+  end
+
   private
 
   def post
