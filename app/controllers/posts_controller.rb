@@ -16,18 +16,27 @@ class PostsController < ApplicationController
   end
 
   def like
-    result = CreateOrDestroyLike.call(current_user, post)
-    flash[result.flash_type] = result.flash_message
+    result = Post::Operation::CreateOrDestroyLike.(user: current_user, origin: post)
+
+    flash[result[:flash_type]] = result[:message]
 
     redirect_to posts_path
   end
 
-  def create_random_posts
+  def create_random
+    result = Post::Operation::CreateRandom.(user: current_user)
 
+    result.success? ? flash['notice'] = 'Success created' : flash['alert'] = 'Failure create'
+
+    redirect_to posts_path
   end
 
   def destroy_all
-    
+    current_user.posts.includes(:likes, :comments).destroy_all
+
+    flash['notice'] = 'All posts were destroyed'
+
+    redirect_to posts_path
   end
 
   private

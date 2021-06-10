@@ -1,8 +1,8 @@
 <h2>Post list page</h2>
 
 <%= link_to  "Create new post", new_post_path, class: 'btn btn-outline-primary' %>
-<%= link_to  "Random post or posts", create_random_posts_posts_path, method: :post, class: 'btn btn-outline-primary' %>
-<%= link_to  "Destroy all", destroy_all_posts_posts_path, method: :delete, class: 'btn btn-outline-danger' %>
+<%= link_to  "Random post or posts", create_random_posts_path, method: :post, class: 'btn btn-outline-primary' %>
+<%= link_to  "Destroy all", destroy_all_posts_path, method: :delete, class: 'btn btn-outline-danger' %>
 
 <% @posts.each do |post| %>
   <div class='post-block'>

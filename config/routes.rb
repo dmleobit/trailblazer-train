@@ -19,8 +19,8 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create destroy] do
     collection do
-      post :create_random_posts
-      delete :destroy_all_posts
+      post :create_random
+      delete :destroy_all
     end
     member do
       post :like

@@ -21,7 +21,7 @@ class CreateOrDestroyLike < ApplicationService
   def destroy_like
     like.destroy
     OpenStruct.new(
-      flash_type: 'danger',
+      flash_type: 'alert',
       flash_message: 'Disliked'
     )
   end
