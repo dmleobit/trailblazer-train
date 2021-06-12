@@ -1,5 +1,5 @@
-module Post::Operation
-  class CreateOrDestroyLike < Trailblazer::Operation
+module Comment::Operation
+  class Like < Trailblazer::Operation
     pass :destroy_like, fast_track: true
     step :create_like
 

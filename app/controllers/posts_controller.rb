@@ -16,7 +16,7 @@ class PostsController < ApplicationController
   end
 
   def like
-    result = Post::Operation::CreateOrDestroyLike.(user: current_user, origin: post)
+    result = Post::Operation::Like.(user: current_user, origin: post)
 
     flash[result[:flash_type]] = result[:message]
 

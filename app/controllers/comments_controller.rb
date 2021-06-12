@@ -3,24 +3,27 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: %i[like]
 
   def index
-    @comments = @post.comments.includes(:user, :likes)
-    @comment = current_user.comments.new
+    result = Comment::Operation::Index.(post: @post)
+
+    @comments = result[:comments]
+    @comment = result[:model]
   end
 
   def create
-    @comment = current_user.comments.new(coment_params)
-    if @comment.save
+    result = Comment::Operation::Create.(coment_params: coment_params)
+
+    if result.success?
       flash[:success] = 'Comment was created'
     else
-      flash[:error] = 'Sorry, some error'
+      flash[:alert] = 'Sorry, some error'
     end
 
     redirect_to comments_path(@post)
   end
 
   def like
-    result = CreateOrDestroyLike.call(current_user, @comment)
-    flash[result.flash_type] = result.flash_message
+    result = Comment::Operation::Like.call(user: current_user, origin: @comment)
+    flash[result[:flash_type]] = result[:message]
 
     redirect_to comments_path(@comment.post)
   end
@@ -28,7 +31,7 @@ class CommentsController < ApplicationController
   private
 
   def coment_params
-    params.require(:comment).permit(:text).merge(post: @post)
+    params.require(:comment).permit(:text).merge(post: @post, user: current_user)
   end
 
   def set_comment
