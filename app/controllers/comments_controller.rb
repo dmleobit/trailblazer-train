@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   end
 
   def create
-    result = Comment::Operation::Create.(coment_params: coment_params)
+    result = Comment::Operation::Create.(params: coment_params)
 
     if result.success?
       flash[:success] = 'Comment was created'
