@@ -71,5 +71,6 @@ Rails.application.configure do
     Bullet.rails_logger = true
     Bullet.raise = true
     Bullet.unused_eager_loading_enable = false
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: "ActiveStorage::Attachment", association: :blob
   end
 end
