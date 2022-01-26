@@ -1,0 +1,8 @@
+<div class='post-block'>
+  <p><%= model.text %></p>
+  <h6>Author - <%= model.user.email %></h6>
+  <%= link_to  "Like", like_post_path(model), method: :post %>
+  <%= like_count %>
+  <%= link_to_comments %>
+  <%= model.comments.count %>
+</div>

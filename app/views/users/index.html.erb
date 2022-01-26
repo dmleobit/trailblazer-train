@@ -1,10 +1,5 @@
 <h1>User`s page</h1>
 
 <% @users.each do |user| %>
-  <div class='user-block'>
-    <%= image_tag  avatar(user), class: 'avatar-list' %>
-    <%= user.email %>
-    <%= link_to  "Show page", user_path(user), class: 'btn btn-outline-info' %>
-    <%= request_button(user) %>
-  </div>
+  <%= concept("user/cell", user, current_user: current_user) %>
 <% end %>
