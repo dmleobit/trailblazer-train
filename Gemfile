@@ -31,8 +31,14 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'dotenv-rails'
 gem 'draper'
-gem 'omniauth-facebook'
 gem 'simple_form'
+
+# Own gems
+gem 'trailblazer-rails'
+gem 'cells-rails'
+gem 'cells-erb'
+gem 'reform'
+gem 'reform-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

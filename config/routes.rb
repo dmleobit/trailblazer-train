@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    omniauth_callbacks: 'users/omniauth_callbacks',
-    registrations: 'users/registrations'
-  }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   resources :users, only: %i[index show update] do
     collection do
@@ -21,6 +18,10 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: %i[index new create destroy] do
+    collection do
+      post :create_random
+      delete :destroy_all
+    end
     member do
       post :like
       resources :comments, only: %i[index create] do
@@ -28,6 +29,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :notifications, only: :index
 
   root 'posts#index'
 end

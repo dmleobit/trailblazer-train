@@ -9,15 +9,37 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    return render 'new' unless @post.save
+    result = Post::Operation::Create.(params: post_params, current_user: current_user)
+
+    if result.success?
+      redirect_to posts_path, notice: 'Post has been created!'
+    else
+      @post = result['contract.default'].model
+      @errors = result['contract.default'].errors
+      return render :new
+    end
+  end
+
+  def like
+    result = Post::Operation::Like.(user: current_user, origin: post)
+
+    flash[result[:flash_type]] = result[:message]
 
     redirect_to posts_path
   end
 
-  def like
-    result = CreateOrDestroyLike.call(current_user, post)
-    flash[result.flash_type] = result.flash_message
+  def create_random
+    result = Post::Operation::CreateRandom.(user: current_user)
+
+    result.success? ? flash['notice'] = 'Success created' : flash['alert'] = 'Failure create'
+
+    redirect_to posts_path
+  end
+
+  def destroy_all
+    current_user.posts.includes(:likes, comments: [:likes]).destroy_all
+
+    flash['notice'] = 'All posts were destroyed'
 
     redirect_to posts_path
   end
