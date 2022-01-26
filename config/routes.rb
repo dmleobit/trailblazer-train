@@ -29,6 +29,7 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :notifications, only: :index
 
   root 'posts#index'
 end

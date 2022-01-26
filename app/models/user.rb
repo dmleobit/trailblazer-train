@@ -14,6 +14,7 @@ class User < ApplicationRecord
     assoc.has_many :posts
     assoc.has_many :likes
     assoc.has_many :comments
+    assoc.has_many :notifications
   end
 
   has_one_attached :avatar

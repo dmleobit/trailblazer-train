@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
     if result.success?
       flash[:success] = 'Comment was created'
     else
-      flash[:alert] = 'Sorry, some error'
+      flash[:alert] = result['contract.default'].errors.full_messages[0]
     end
 
     redirect_to comments_path(@post)

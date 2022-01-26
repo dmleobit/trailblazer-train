@@ -9,10 +9,15 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    return render 'new' unless @post.save
+    result = Post::Operation::Create.(params: post_params, current_user: current_user)
 
-    redirect_to posts_path
+    if result.success?
+      redirect_to posts_path, notice: 'Post has been created!'
+    else
+      @post = result['contract.default'].model
+      @errors = result['contract.default'].errors
+      return render :new
+    end
   end
 
   def like
@@ -32,7 +37,7 @@ class PostsController < ApplicationController
   end
 
   def destroy_all
-    current_user.posts.includes(:likes, :comments).destroy_all
+    current_user.posts.includes(:likes, comments: [:likes]).destroy_all
 
     flash['notice'] = 'All posts were destroyed'
 
